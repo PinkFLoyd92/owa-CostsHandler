@@ -1,0 +1,6 @@
+org/openmrs/module/billing/api/BillingService.class
+org/openmrs/module/billing/api/impl/BillingServiceImpl.class
+org/openmrs/module/billing/BillingActivator.class
+org/openmrs/module/billing/BillingConfig.class
+org/openmrs/module/billing/Item.class
+org/openmrs/module/billing/api/dao/BillingDao.class
