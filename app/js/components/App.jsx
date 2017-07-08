@@ -9,14 +9,17 @@
  * under the License.
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-import React from 'react';
+import React from "react"
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello, world</h1>
-      </div>
-    )
-  }
+    componentWillMount(){
+    }
+ 
+    render() {
+        return (
+            <div>
+                <h1>Hello, world</h1>
+            </div>
+        )
+    }
 }
