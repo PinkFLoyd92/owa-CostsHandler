@@ -12,12 +12,16 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import {Provider} from 'react-redux'
 
 import createStore from './redux-store'
 import routes from './routes'
 
 let store = createStore();
+
+const history = syncHistoryWithStore(hashHistory, store)
 
 render((
          <Provider store={store}>

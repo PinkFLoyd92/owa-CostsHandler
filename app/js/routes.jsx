@@ -9,16 +9,16 @@
  * under the License.
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-import React from 'react'
-import {Route} from 'react-router'
-import App from './components/App'
+import React from "react"
+import {Route} from "react-router"
+import App from "./components/App"
 
 export default (store) => {
-  // combine store and onEnter if you need to fire an action when going to a route. Example:
-  //   onEnter={ (nextState) => {store.dispatch(loadPatientAction(nextState.params.patientUuid)} }
+    // combine store and onEnter if you need to fire an action when going to a route. Example:
+    //   onEnter={ (nextState) => {store.dispatch(loadPatientAction(nextState.params.patientUuid)} }
 
-  return (
-    <Route path="/" component={App}>
-    </Route>
-  );
+    return (
+        <Route path="/" component={App}>
+        </Route>
+    )
 }

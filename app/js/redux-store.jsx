@@ -10,16 +10,17 @@
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
 
-import {createStore, applyMiddleware, combineReducers} from 'redux'
-import promiseMiddleware from 'redux-promise-middleware';
-import thunkMiddleware from 'redux-thunk';
-import * as reducers from './reducers'
+import {createStore, applyMiddleware, combineReducers} from "redux"
+import promiseMiddleware from "redux-promise-middleware"
+import thunkMiddleware from "redux-thunk"
+import * as reducers from "./reducers"
+import {routerReducer } from "react-router-redux"
 
-export default function () {
-  const reducer = combineReducers(reducers);
-  const store = createStore(reducer, {}, applyMiddleware(
-    thunkMiddleware,
-    promiseMiddleware()
-  ));
-  return store;
+export default function storeNew() {
+    const reducer = combineReducers(Object.assign({}, reducers, {routing: routerReducer}))
+    const store = createStore(reducer, {}, applyMiddleware(
+        thunkMiddleware,
+        promiseMiddleware()
+    ))
+    return store
 }
