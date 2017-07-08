@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "name": "billingReact",
+  "description": "Billing module made using a OWA module",
+  "launch_path": "index.html",
+  "icons": {
+    "48": "/img/omrs-button.png"
+  },
+  "developer": {
+    "name": "pinkfloyd92",
+    "url": "https://github.com/pinkfloyd92/openmrs-owa-billingreact"
+  },
+  "default_locale": "en",
+    "activities": {
+      "openmrs": {
+        "href": "*"
+      }
+    }
+}
