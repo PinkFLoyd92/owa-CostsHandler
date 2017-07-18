@@ -10,23 +10,23 @@
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
 import React from 'react';
-import {render} from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { render } from 'react-dom';
+import { Router, Route, hashHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux';
 
-import createStore from './redux-store'
-import routes from './routes'
+import createStore from './redux-store';
+import routes from './routes';
 
-let store = createStore();
+const store = createStore();
 
-const history = syncHistoryWithStore(hashHistory, store)
+const history = syncHistoryWithStore(hashHistory, store);
 
 render((
-         <Provider store={store}>
-           <Router history={hashHistory}>
-             {routes(store)}
-           </Router>
-         </Provider>
+  <Provider store={store}>
+    <Router history={hashHistory}>
+      {routes(store)}
+    </Router>
+  </Provider>
        ), document.getElementById('app'));

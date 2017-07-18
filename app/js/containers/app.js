@@ -1,24 +1,15 @@
-import React, { Component } from "react"
-import { bindActionCreators } from "redux"
-import { connect } from "react-redux"
-import {App} from "../components/App"
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import App from '../components/App';
+import * as DrugActions from '../actions/DrugActions';
 
-class Container extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-    render () {
-        return (
-            <App/>
-        )   
-    }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(DrugActions, dispatch);
 }
 
-const mapStateToProps = (state) => {
-    return Object.assign({}, state, {
-        products : state.products
-    })
-}
+const mapStateToProps = state => Object.assign({}, state, {
+    drugs: state.drugs,
+});
 
-export default connect(mapStateToProps)(Container)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

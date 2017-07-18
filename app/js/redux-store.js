@@ -9,17 +9,20 @@
  * under the License.
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-import React from "react"
 
-export default class App extends React.Component {
-    componentWillMount(){
-    }
- 
-    render() {
-        return (
-            <div>
-                <h1>Hello, world</h1>
-            </div>
-        )
-    }
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import promiseMiddleware from 'redux-promise-middleware';
+import thunkMiddleware from 'redux-thunk';
+import rootReducer from './reducers';
+
+export default function storeNew() {
+  const initialState = {
+    drugs: [],
+    drawOpen: true,
+  };
+  const store = createStore(rootReducer, initialState, applyMiddleware(
+        thunkMiddleware,
+        promiseMiddleware(),
+    ));
+  return store;
 }
