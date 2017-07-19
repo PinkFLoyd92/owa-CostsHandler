@@ -10,19 +10,31 @@
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
 
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const enhancer = composeEnhancers(
+applyMiddleware(
+        thunkMiddleware,
+        promiseMiddleware(),
+),
+);
+
 export default function storeNew() {
   const initialState = {
     drugs: [],
-    drawOpen: true,
+    drawOpen: false,
+    drugSelected: {},
   };
-  const store = createStore(rootReducer, initialState, applyMiddleware(
-        thunkMiddleware,
-        promiseMiddleware(),
-    ));
+  const store = createStore(rootReducer, initialState, enhancer);
   return store;
 }

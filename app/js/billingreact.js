@@ -13,6 +13,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { browserHistory } from 'react-router'
 
 import { Provider } from 'react-redux';
 
@@ -25,7 +26,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 
 render((
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={history}>
       {routes(store)}
     </Router>
   </Provider>

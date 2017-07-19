@@ -1,9 +1,10 @@
-import { ADD_DRUG } from '../actions/DrugActions';
+import { ADD_DRUG, SELECT_DRUG } from '../actions/DrugActions';
 
 const drug = (state = {}, action) => {
   switch (action.type) {
     case ADD_DRUG:
       return {
+        id: action.payload.id,
         name: action.payload.name,
         description: action.payload.description,
         types: action.payload.types,
@@ -14,7 +15,7 @@ const drug = (state = {}, action) => {
   }
 };
 
-export default function drugs(state = [], action) {
+function drugs(state = [], action) {
   switch (action.type) {
     case ADD_DRUG:
       return [...state, drug(undefined, action)];
@@ -22,3 +23,22 @@ export default function drugs(state = [], action) {
       return state;
   }
 }
+
+
+function selectDrug(state = {}, action) {
+  switch (action.type) {
+    case SELECT_DRUG:
+      return Object.assign({}, state, {
+        id: action.payload.id,
+        name: action.payload.name,
+        description: action.payload.description,
+        types: action.payload.types,
+        price: action.payload.price,
+      });
+
+    default:
+      return state;
+  }
+}
+
+export { selectDrug, drugs };

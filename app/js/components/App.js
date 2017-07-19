@@ -18,6 +18,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 import { deepOrange500 } from 'material-ui/styles/colors';
+import Toggle from 'material-ui/Toggle';
+import Drug from '../containers/drug';
 
 injectTapEventPlugin();
 
@@ -31,27 +33,30 @@ class App extends Component {
       userAgent: props.userAgent,
     });
 
+    this.handleDrawChange = this.handleDrawChange.bind(this);
   }
 
-  componentWillMount() {
+  handleDrawChange() {
+    this.props.toggleDraw(this.props.drawOpen);
   }
 
   render() {
-    console.log(this.props);
     return (
       <MuiThemeProvider muiTheme={this.muiTheme}>
-        {/* <AppBar
-            title="CRUD"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-            /> */}
-        <Drawer open={this.props.drawOpen}>
-          <MenuItem>Manejo de Precios en Medicinas</MenuItem>
-          <MenuItem>Visualizaci&oacute;n de facturas</MenuItem>
-        </Drawer>
-        {/* <RaisedButton
-              label="Toggle Drawer"
-              onTouchTap={this.handleToggleDrawer}
-              /> */}
+        <div>
+          <Drawer open={this.props.drawOpen}>
+            <MenuItem>Manejo de Precios en Medicinas</MenuItem>
+            <MenuItem>Visualizaci&oacute;n de facturas</MenuItem>
+          </Drawer>
+          <Toggle
+            label="Mostrar/Esconder"
+            defaultToggled
+            onToggle={this.handleDrawChange}
+            labelPosition="right"
+            style={{ margin: 20 }}
+          />
+          { this.props.children }
+        </div>
       </MuiThemeProvider>
     );
   }

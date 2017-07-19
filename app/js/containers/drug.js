@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import App from '../components/App';
+import Drug from '../components/Drug';
 import * as DrugActions from '../actions/DrugActions';
 
 function mapDispatchToProps(dispatch) {
@@ -9,7 +8,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = state => Object.assign({}, state, {
-    drawOpen: state.drawOpen,
+  drugs: state.drugs,
+  drugSelected: state.drugSelected,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Drug);
