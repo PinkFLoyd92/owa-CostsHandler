@@ -1,4 +1,4 @@
-import { ADD_DRUG, SELECT_DRUG } from '../actions/DrugActions';
+import { ADD_DRUG, SELECT_DRUG, DELETE_DRUG } from "../actions/DrugActions"
 
 const drug = (state = {}, action) => {
   switch (action.type) {
@@ -9,18 +9,20 @@ const drug = (state = {}, action) => {
         description: action.payload.description,
         types: action.payload.types,
         price: action.payload.price,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 function drugs(state = [], action) {
   switch (action.type) {
     case ADD_DRUG:
-      return [...state, drug(undefined, action)];
+      return [...state, drug(undefined, action)]
+    case DELETE_DRUG:
+      return state.filter(obj => parseInt(obj.id) !== parseInt(action.payload.id))
     default:
-      return state;
+      return state
   }
 }
 
@@ -34,11 +36,11 @@ function selectDrug(state = {}, action) {
         description: action.payload.description,
         types: action.payload.types,
         price: action.payload.price,
-      });
+      })
 
     default:
-      return state;
+      return state
   }
 }
 
-export { selectDrug, drugs };
+export { selectDrug, drugs }
