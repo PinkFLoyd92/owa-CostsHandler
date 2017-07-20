@@ -1,9 +1,9 @@
-import React from "react"
-import { Component } from "react"
+import React, { Component } from "react"
 import IconButton from "material-ui/IconButton"
 import Dialog from "material-ui/Dialog"
 import TextField from "material-ui/TextField"
 import FlatButton from "material-ui/FlatButton"
+import { drugs } from "../resources"
 import {
   Table,
   TableBody,
@@ -12,7 +12,6 @@ import {
   TableRow,
   TableRowColumn,
 } from "material-ui/Table"
-// import drugs from '../resources';
 
 class Drug extends Component {
   constructor(props) {
@@ -29,23 +28,16 @@ class Drug extends Component {
   }
 
   componentWillMount() {
-    const drugs = [
-  { id: 1, name: "paracetamol", tipo: "pastilla", base_price: 1 },
-  { id: 2, name: "lorem", tipo: "jarabe", base_price: 2 },
-  { id: 3, name: "ipsum", tipo: "doe", base_price: 3 },
-    ]
     for (const d in drugs) {
-      this.props.addDrug(parseInt(drugs[d].id), drugs[d].name, "TEMPORAL", drugs[d].tipo, parseFloat(drugs[d].base_price))
+      this.props.addDrug(parseInt(drugs[d].id), drugs[d].nombre, drugs[d].tipo, drugs[d].precios_fecha, drugs[d].codigo)
     }
   }
 
   handleEdit(evt) {
     const id = evt.target.getAttribute("data-key")
     const drug = this.props.drugs.filter(d => parseInt(d.id) === parseInt(id))[0]
-    console.info("XXXXXXXXXXXXXXx", drug)
-
     if (drug) {
-      this.props.selectDrug(drug.id, drug.name, drug.description, drug.types, drug.price)
+      this.props.selectDrug(drug.id, drug.nombre, drug.tipo, drug.precios_fecha, drug.codigo)
       this.setState({ modalOpen: true })
     } else {
       console.error("DRUG NOT FOUND IN DATABASE")
@@ -57,7 +49,7 @@ class Drug extends Component {
     const drug = this.props.drugs.filter(d => parseInt(d.id) === parseInt(id))[0]
     console.info("A ELIMINAR: ", drug)
     if (drug) {
-      this.props.selectDrug(drug.id, drug.name, drug.description, drug.types, drug.price)
+      this.props.selectDrug(drug.id, drug.nombre, drug.tipo, drug.precios_fecha, drug.codigo)
       this.setState({ openDelete: true })
     } else {
       console.error("DRUG NOT FOUND IN DATABASE")
@@ -83,23 +75,19 @@ class Drug extends Component {
   }
   render() {
     // console.log(this.props)
-    const drugs = this.props.drugs
     const tbDrugs = this.props.drugs.map(obj => (
       <TableRow key={obj.id}>
         <TableRowColumn>
-          {obj.name}
+          {obj.codigo}
         </TableRowColumn>
         <TableRowColumn>
-          {obj.description}
+          {obj.nombre}
         </TableRowColumn>
         <TableRowColumn>
-          {obj.types}
+          {obj.tipo}
         </TableRowColumn>
         <TableRowColumn>
-          {obj.price}
-        </TableRowColumn>
-        <TableRowColumn>
-          {obj.price}
+          { obj.precios_fecha ? obj.precios_fecha[0].precio : "NOT DEFINED"}
         </TableRowColumn>
         <TableRowColumn>
           <IconButton
@@ -155,10 +143,10 @@ class Drug extends Component {
         <Table selectable={false} >
           <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
             <TableRow selectable={false}>
-              <TableHeaderColumn>Nombre</TableHeaderColumn>
-              <TableHeaderColumn>Descripci&oacute;n</TableHeaderColumn>
-              <TableHeaderColumn>Tipo</TableHeaderColumn>
-              <TableHeaderColumn>Precio</TableHeaderColumn>
+              <TableHeaderColumn>CODIGO</TableHeaderColumn>
+              <TableHeaderColumn>NOMBRE</TableHeaderColumn>
+              <TableHeaderColumn>TIPO</TableHeaderColumn>
+              <TableHeaderColumn>PRECIO</TableHeaderColumn>
               <TableHeaderColumn />
               <TableHeaderColumn />
             </TableRow>
@@ -174,22 +162,22 @@ class Drug extends Component {
           open={this.state.modalOpen}
         >
           <TextField
-            value={this.props.drugSelected.name}
-            floatingLabelText="Nombre"
+            value={this.props.drugSelected.nombre}
+            floatingLabelText="NOMBRE"
             disabled
           /><br />
           <TextField
-            value={this.props.drugSelected.description}
-            floatingLabelText="Descripcion"
+            value={this.props.drugSelected.codigo}
+            floatingLabelText="CODIGO"
             disabled
           />
           <TextField
-            value={this.props.drugSelected.types}
-            floatingLabelText="Tipo"
+            defaultValue={this.props.drugSelected.tipo}
+            floatingLabelText="TIPO"
           /><br />
           <TextField
-            value={this.props.drugSelected.price}
-            floatingLabelText="Precio"
+            defaultValue={this.props.drugSelected.precios_fecha ? this.props.drugSelected.precios_fecha[0].precio : "NO DEFINIDO"}
+            floatingLabelText="PRECIO"
           /><br />
         </Dialog>
         <Dialog
@@ -198,7 +186,7 @@ class Drug extends Component {
           open={this.state.openDelete}
           onRequestClose={this.handleClose}
         >
-            Eliminar medicamento {this.props.drugSelected.name}?
+            Eliminar medicamento {this.props.drugSelected.nombre}?
         </Dialog>
       </div>
     )

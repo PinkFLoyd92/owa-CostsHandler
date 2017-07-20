@@ -32,7 +32,7 @@ applyMiddleware(
 export default function storeNew() {
   const initialState = {
     drugs: [],
-    drawOpen: false,
+    drawOpen: true,
     drugSelected: {},
   };
   const store = createStore(rootReducer, initialState, enhancer);

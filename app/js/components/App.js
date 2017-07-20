@@ -1,43 +1,31 @@
-/**
- * The contents of this file are subject to the OpenMRS Public License
- * Version 1.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- * http://license.openmrs.org
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
- * License for the specific language governing rights and limitations
- * under the License.
- * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
- */
-import React from 'react';
-import { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
-import { deepOrange500 } from 'material-ui/styles/colors';
-import Toggle from 'material-ui/Toggle';
-import Drug from '../containers/drug';
+import React, { Component } from "react"
+import AppBar from "material-ui/AppBar"
+import Drawer from "material-ui/Drawer"
+import MenuItem from "material-ui/MenuItem"
+import RaisedButton from "material-ui/RaisedButton"
+import injectTapEventPlugin from "react-tap-event-plugin"
+import { MuiThemeProvider, getMuiTheme } from "material-ui/styles"
+import { deepOrange500 } from "material-ui/styles/colors"
+import Toggle from "material-ui/Toggle"
+import Drug from "../containers/drug"
 
-injectTapEventPlugin();
+injectTapEventPlugin()
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.muiTheme = getMuiTheme({
       palette: {
         accent1Color: deepOrange500,
       },
       userAgent: props.userAgent,
-    });
+    })
 
-    this.handleDrawChange = this.handleDrawChange.bind(this);
+    this.handleDrawChange = this.handleDrawChange.bind(this)
   }
 
   handleDrawChange() {
-    this.props.toggleDraw(this.props.drawOpen);
+    this.props.toggleDraw(this.props.drawOpen)
   }
 
   render() {
@@ -45,8 +33,8 @@ class App extends Component {
       <MuiThemeProvider muiTheme={this.muiTheme}>
         <div>
           <Drawer open={this.props.drawOpen}>
-            <MenuItem>Manejo de Precios en Medicinas</MenuItem>
-            <MenuItem>Visualizaci&oacute;n de facturas</MenuItem>
+            <MenuItem>Manejo de Precios en Medicinas (DEBE USARSE POR EL QUE MANEJE EL STOCK)</MenuItem>
+            <MenuItem>Manejo de Stock</MenuItem>
           </Drawer>
           <Toggle
             label="Mostrar/Esconder"
@@ -58,8 +46,8 @@ class App extends Component {
           { this.props.children }
         </div>
       </MuiThemeProvider>
-    );
+    )
   }
 }
 
-export default App;
+export default App

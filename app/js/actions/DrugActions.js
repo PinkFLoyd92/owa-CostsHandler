@@ -4,17 +4,17 @@ export const DELETE_DRUG = "DELETE_DRUG"
 export const TOGGLE_DRAW = "TOGGLE_DRAW"
 
 
-export function addDrug(id, name, description, types, price) {
+export function addDrug(id, nombre, tipo, precios_fecha, codigo) {
   return {
     type: ADD_DRUG,
-    payload: { id, name, description, types, price },
+    payload: { id, nombre, tipo, precios_fecha, codigo },
   }
 }
 
-export function selectDrug(id, name, description, types, price) {
+export function selectDrug(id, nombre, tipo, precios_fecha, codigo) {
   return {
     type: SELECT_DRUG,
-    payload: { id, name, description, types, price },
+    payload: { id, nombre, tipo, precios_fecha, codigo },
   }
 }
 

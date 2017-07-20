@@ -5,10 +5,10 @@ const drug = (state = {}, action) => {
     case ADD_DRUG:
       return {
         id: action.payload.id,
-        name: action.payload.name,
-        description: action.payload.description,
-        types: action.payload.types,
-        price: action.payload.price,
+        nombre: action.payload.nombre,
+        tipo: action.payload.tipo,
+        precios_fecha: action.payload.precios_fecha,
+        codigo: action.payload.codigo,
       }
     default:
       return state
@@ -32,10 +32,10 @@ function selectDrug(state = {}, action) {
     case SELECT_DRUG:
       return Object.assign({}, state, {
         id: action.payload.id,
-        name: action.payload.name,
-        description: action.payload.description,
-        types: action.payload.types,
-        price: action.payload.price,
+        nombre: action.payload.nombre,
+        codigo: action.payload.codigo,
+        tipo: action.payload.tipo,
+        precios_fecha: action.payload.precios_fecha,
       })
 
     default:
